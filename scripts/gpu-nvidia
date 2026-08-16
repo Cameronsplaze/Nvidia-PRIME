@@ -22,7 +22,6 @@ notify() {
 safe_modprobe() {
     local output
     if ! output=$(modprobe "$@" 2>&1); then
-        # amdgpu keeping a module busy is expected here, anything else is fatal
         echo "$output" | grep -q "Module amdgpu is in use" || fail "$output"
     fi
 }
